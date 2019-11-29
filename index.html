@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Dynamic Page Renderer | Javascript</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="lib/jquery.js"></script>
+    <script src="lib/vue.js"></script>
+
+</head>
+
+
+<body ng-app="myAPP">
+
+    <div class="top-header">
+        <div>
+            <button onclick="loadPage('page1')" class="btn-primary">Load Page 1</button>
+            <button onclick="loadPage('page2')" class="btn-primary">Load Page 2</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div id="content" class="main-content"></div>
+    </div>
+
+</body>
+
+<script>
+    function loadPage(view) {
+        let url = `views/${view}.html`;
+        const contentDiv = document.getElementById("content");
+        $(contentDiv).load(url);
+    }
+</script>
+
+</html>

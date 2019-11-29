@@ -1,0 +1,18 @@
+.top-header {
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    background: lightblue;
+}
+
+.btn-primary {
+    height: 30px;
+    background: deepskyblue;
+    color: black;
+}
+
+.main-content {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}

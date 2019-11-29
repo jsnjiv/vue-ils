@@ -1,0 +1,13 @@
+<div id="app">
+    <input v-model="message" placeholder="Enter Mobile" type="number" maxlength="10" max="10">
+    <p>Message is: {{ message }}</p>
+</div>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue! Page 1'
+        }
+    })
+</script>

@@ -5,7 +5,7 @@
 <head>
     <title>Dynamic Page Renderer | Javascript</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="lib/jquery.js"></script>
+    <!-- <script src="lib/jquery.js"></script> -->
     <script src="lib/vue.js"></script>
 
 </head>
@@ -27,10 +27,51 @@
 </body>
 
 <script>
-    function loadPage(view) {
+    const setInnerHTMLMethodOne = function(elm, html) {
+        elm.innerHTML = html;
+        Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
+            const newScript = document.createElement("script");
+            Array.from(oldScript.attributes)
+                .forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+    }
+
+    const setInnerHTMLMethodTwo = function(ele, html) {
+        ele.innerHTML = html;
+        let codes = ele.getElementsByTagName("script");
+        for (let i = 0; i < codes.length; i++) {
+            eval(codes[i].text);
+        }
+    }
+
+    const setInnerHTMLMethodThree = function(ele, html) {
+        ele.innerHTML = html;
+        let scripts = Array.prototype.slice.call(ele.getElementsByTagName("script"));
+        for (let i = 0; i < scripts.length; i++) {
+            if (scripts[i].src != "") {
+                let tag = document.createElement("script");
+                tag.src = scripts[i].src;
+                document.getElementsByTagName("head")[0].appendChild(tag);
+            } else {
+                eval(scripts[i].innerHTML);
+            }
+        }
+    }
+
+    async function getHTMLContent(url) {
+        return await (await fetch(url)).text();
+    }
+
+    async function loadPage(view) {
         let url = `views/${view}.html`;
         const contentDiv = document.getElementById("content");
-        $(contentDiv).load(url);
+        // $(contentDiv).load(url); // ----- Using Jquery (That's a very old method!!!)
+        let HTMLText = await getHTMLContent(url);
+        setInnerHTMLMethodOne(contentDiv, HTMLText);
+        // setInnerHTMLMethodTwo(contentDiv, HTMLText);
+        // setInnerHTMLMethodThree(contentDiv, HTMLText);
     }
 </script>
 

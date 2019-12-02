@@ -1,33 +1,96 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
     <title>Dynamic Page Renderer | Javascript</title>
     <link rel="icon" type="image/png" href="images/icon.png">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- <script src="lib/jquery.js"></script> -->
-    <script src="lib/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- <link href="styles/materialdesignicons.css" rel="stylesheet" type="text/css"> -->
+    <!-- <link href="styles/vuetify.css" rel="stylesheet" type="text/css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/material-design-icons-iconfont@5.0.1/dist/material-design-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <!-- <script src="lib/vue.js"></script> -->
+    <!-- <script src="lib/vuetify.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.1.12/dist/vuetify.min.js"></script>
+    <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+
 
 </head>
 
+<body>
 
-<body ng-app="myAPP">
-
-    <div class="top-header">
-        <div>
-            <button onclick="loadPage('page1')" class="btn-primary">Load Page 1</button>
-            <button onclick="loadPage('page2')" class="btn-primary">Load Page 2</button>
-        </div>
-    </div>
+    <v-app id="mainApp" style="height: 64px;">
+        <template>
+            <div>
+                <v-toolbar>
+                <v-toolbar-title>Title</v-toolbar-title>
+                <v-spacer></v-spacer>
+           
+                <v-toolbar-items>
+                    <v-btn text @click="loadPage('page1')">Page 1</v-btn>
+                    <v-btn text @click="loadPage('page2')">Page 2</v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
+            </div>
+            </template>
+    </v-app>
 
     <div class="main-container">
         <div id="content" class="main-content"></div>
     </div>
 
+
 </body>
 
+<!-- <div class="top-header">
+        <div>
+            <button onclick="loadPage('page1')" class="btn-primary">Load Page 1</button>
+            <button onclick="loadPage('page2')" class="btn-primary">Load Page 2</button>
+        </div>
+     </div>
+    <div class="main-container">
+        <div id="content" class="main-content"></div>
+    </div> 
+-->
+
 <script>
+    var mainAPP = new Vue({
+        el: '#mainApp',
+        vuetify: new Vuetify(),
+        data: {},
+        methods: {
+            loadPage: async function(view) {
+                let url = `views/${view}.html`;
+                const contentDiv = document.getElementById("content");
+                let HTMLText = await this.getHTMLContent(url);
+                this.setInnerHTMLMethodOne(contentDiv, HTMLText);
+            },
+            setInnerHTMLMethodOne: async function(elm, html) {
+                elm.innerHTML = html;
+                Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    Array.from(oldScript.attributes)
+                        .forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            },
+            getHTMLContent: async function(url) {
+                return await (await fetch(url)).text();
+            }
+        },
+    })
+</script>
+
+
+
+
+<!-- <script>
     const setInnerHTMLMethodOne = function(elm, html) {
         elm.innerHTML = html;
         Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
@@ -74,6 +137,6 @@
         // setInnerHTMLMethodTwo(contentDiv, HTMLText);
         // setInnerHTMLMethodThree(contentDiv, HTMLText);
     }
-</script>
+</script> -->
 
 </html>

@@ -1,12 +1,23 @@
-<div id="app">
-    {{ message }}
+<script type="text/javascript" src="../scripts/page2.js"></script>
+<div id="page2App">
+    <template>
+                <v-card>
+                  <v-card-title>
+                    Nutrition
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                      v-model="search"
+                      append-icon="search"
+                      label="Search"
+                      single-line
+                      hide-details
+                    ></v-text-field>
+                  </v-card-title>
+                  <v-data-table
+                    :headers="headers"
+                    :items="desserts"
+                    :search="search"
+                  ></v-data-table>
+                </v-card>
+              </template>
 </div>
-
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello Vue! Page 2'
-        }
-    })
-</script>

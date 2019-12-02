@@ -1,13 +1,63 @@
-<div id="app">
-    <input v-model="message" placeholder="Enter Message" type="text" maxlength="10" max="10">
-    <p>Message is: {{ message }}</p>
-</div>
+<script type="text/javascript" src="../scripts/page1.js"></script>
+<v-app id="page1App" v-if="showContent">
+    <v-row>
+        <v-col col-6>
+            <div class="my-6 text-center">Dialog and Button</div>
+        </v-col>
+        <v-col col-6>
+            <div class="my-6">
+                <v-btn small color="error" @click="openModal()">Open Modal</v-btn>
+            </div>
+            <v-dialog v-model="dialog" max-width="290">
+                <v-card>
+                    <v-card-title class="headline">Use Google's location service?</v-card-title>
 
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello Vue! Page 1'
-        }
-    })
-</script>
+                    <v-card-text>
+                        Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn color="green darken-1" text @click="dialog = false">
+                            Disagree
+                        </v-btn>
+
+                        <v-btn color="green darken-1" text @click="dialog = false">
+                            Agree
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-col>
+    </v-row>
+
+
+    <v-row>
+        <v-col col-6>
+            <div class="my-6 text-center">Date Picker</div>
+        </v-col>
+        <v-col col-6>
+            <v-btn small color="primary" @click="openPicker()">Open Date Picker</v-btn>
+            <vuejs-datepicker ref="programaticOpen" placeholder="Select Date" :minimum-view="'day'" :maximum-view="'month'"></vuejs-datepicker>
+        </v-col>
+    </v-row>
+
+    <v-row>
+        <v-col col-6>
+            <div class="my-6 text-center">Date Range Picker</div>
+        </v-col>
+        <v-col col-3>
+            <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
+                <template v-slot:activator="{ on }">
+                  <v-text-field v-model="dateRangeText" label="Date range" readonly v-on="on"></v-text-field>
+                </template>
+                <v-date-picker v-model="dates" range color="green">
+                    <v-btn text color="primary" @click="menu2=false">Cancel</v-btn>
+                    <v-btn text color="primary" @click="$refs.menu2.save(dates)">OK</v-btn>
+                </v-date-picker>
+            </v-menu>
+            Selected Date : {{dates}}
+        </v-col>
+    </v-row>
+</v-app>

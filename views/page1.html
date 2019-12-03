@@ -1,5 +1,5 @@
 <script type="text/javascript" src="../scripts/page1.js"></script>
-<v-app id="page1App" v-if="showContent">
+<v-app id="page1App" hidden>
     <v-row>
         <v-col col-6>
             <div class="my-6 text-center">Dialog and Button</div>
@@ -53,11 +53,25 @@
                   <v-text-field v-model="dateRangeText" label="Date range" readonly v-on="on"></v-text-field>
                 </template>
                 <v-date-picker v-model="dates" range color="green">
-                    <v-btn text color="primary" @click="menu2=false">Cancel</v-btn>
+                    <v-btn text color="primary" @click="menu2=false;">Cancel</v-btn>
                     <v-btn text color="primary" @click="$refs.menu2.save(dates)">OK</v-btn>
                 </v-date-picker>
             </v-menu>
             Selected Date : {{dates}}
+        </v-col>
+    </v-row>
+
+    <v-row>
+        <v-col col-6>
+            <div class="my-6 text-center">File Uploader</div>
+        </v-col>
+        <v-col col-6>
+            <div class="my-6">
+                <v-file-input prepend-icon="attach_file" accept="*" show-size small-chips="true" clearable clear-icon="clear" label="Upload Excel File" id="uploadCaptureInputFile" outlined dense v-model="files" multiple></v-file-input>
+            </div>
+            <div class="my-6">
+                <v-btn color="primary" v-on:click="uploadFile()">Upload File</v-btn>
+            </div>
         </v-col>
     </v-row>
 </v-app>

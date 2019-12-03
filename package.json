@@ -1,26 +1,30 @@
 {
-  "name": "vuejsproj",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanjeevIMADE/vue-ils.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sanjeevIMADE/vue-ils/issues"
-  },
-  "homepage": "https://github.com/sanjeevIMADE/vue-ils#readme",
-  "dependencies": {
-    "vue2-daterange-picker": "^0.3.1"
-  }
+    "name": "vuejsproj",
+    "version": "1.0.0",
+    "description": "",
+    "main": "apis/index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "start": "apis/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sanjeevIMADE/vue-ils.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sanjeevIMADE/vue-ils/issues"
+    },
+    "homepage": "https://github.com/sanjeevIMADE/vue-ils#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "multer": "^1.4.2",
+        "vue2-daterange-picker": "^0.3.1"
+    }
 }

@@ -3,66 +3,53 @@
 
 <head>
     <title>Dynamic Page Renderer | Javascript</title>
-    <link rel="icon" type="image/png" href="images/icon.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-
-    <!-- <link href="styles/materialdesignicons.css" rel="stylesheet" type="text/css"> -->
-    <!-- <link href="styles/vuetify.css" rel="stylesheet" type="text/css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/material-design-icons-iconfont@5.0.1/dist/material-design-icons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/ionicons@^4.0.0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^3.5.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@^1.5.4/dist/quasar.min.css" rel="stylesheet" type="text/css">
     <link href="style.css" rel="stylesheet" type="text/css">
-
-    <!-- <script src="lib/vue.js"></script> -->
-    <!-- <script src="lib/vuetify.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.1.12/dist/vuetify.min.js"></script>
-    <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-
 
 </head>
 
 <body>
 
-    <v-app id="mainApp" style="height: 64px;">
-        <template>
-            <div>
-                <v-toolbar>
-                <v-toolbar-title>Title</v-toolbar-title>
-                <v-spacer></v-spacer>
-           
-                <v-toolbar-items>
-                    <v-btn text @click="loadPage('page1')">Page 1</v-btn>
-                    <v-btn text @click="loadPage('page2')">Page 2</v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-            </div>
-            </template>
-    </v-app>
-
-    <div class="main-container">
-        <div id="content" class="main-content"></div>
+    <div class="q-pa-md" id="mainApp">
+        <q-toolbar class="bg-primary text-white q-my-md shadow-2">
+            <q-btn flat round dense icon="menu" class="q-mr-sm"></q-btn>
+            <q-separator dark vertical inset></q-separator>
+            <q-btn stretch flat label="Home"></q-btn>
+            <q-space></q-space>
+            <q-separator dark vertical></q-separator>
+            <q-btn stretch flat label="Page 1" @click="loadPage('page4')"></q-btn>
+            <q-separator dark vertical></q-separator>
+            <q-btn stretch flat label="Page 2" @click="loadPage('page5')"></q-btn>
+            <q-separator dark vertical></q-separator>
+            <q-avatar rounded>
+                <img src="https://cdn.quasar.dev/img/avatar.png">
+            </q-avatar>
+        </q-toolbar>
     </div>
 
+    <q-layout>
+        <q-page-container>
+            <q-page>
+                <div class="q-pa-md" id="content"></div>
+            </q-page>
+        </q-page-container>
+    </q-layout>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@^1.5.4/dist/quasar.ie.polyfills.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@^1.5.4/dist/quasar.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
 
 </body>
-
-<!-- <div class="top-header">
-        <div>
-            <button onclick="loadPage('page1')" class="btn-primary">Load Page 1</button>
-            <button onclick="loadPage('page2')" class="btn-primary">Load Page 2</button>
-        </div>
-     </div>
-    <div class="main-container">
-        <div id="content" class="main-content"></div>
-    </div> 
--->
 
 <script>
     var mainAPP = new Vue({
         el: '#mainApp',
-        vuetify: new Vuetify(),
         data: {},
         methods: {
             loadPage: async function(view) {

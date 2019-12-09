@@ -8,7 +8,7 @@
         <div class="col-4 self-center">
             <div class="row">
                 <div class="q-pa-md">
-                    <q-ajax-bar ref="bar" position="top" color="blue" size="3px" skip-hijack></q-ajax-bar>
+                    <q-ajax-bar ref="bar" position="top" :color="dynamicColor" size="3px" skip-hijack></q-ajax-bar>
                     <q-btn color="primary" label="Trigger" @click="trigger"></q-btn>
                 </div>
                 <div class="q-pa-md">

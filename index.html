@@ -10,10 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/animate.css@^3.5.2/animate.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/quasar@^1.5.4/dist/quasar.min.css" rel="stylesheet" type="text/css">
     <link href="style.css" rel="stylesheet" type="text/css">
-
 </head>
 
-<body>
+<body class="body--dark">
 
     <div class="q-pa-md" id="mainApp">
         <q-toolbar class="bg-primary text-white q-my-md shadow-2">
@@ -21,6 +20,9 @@
             <q-separator dark vertical inset></q-separator>
             <q-btn stretch flat label="Home"></q-btn>
             <q-space></q-space>
+            <div style="margin-right: 10px;">
+                <q-btn-toggle v-model="defaultTheme" class="my-custom-toggle" no-caps rounded unelevated toggle-color="yellow" color="white" text-color="primary" :options="toggleButtonOptions" v-on:click="toggleTheme()"></q-btn-toggle>
+            </div>
             <q-separator dark vertical></q-separator>
             <q-btn stretch flat label="Page 1" @click="loadPage('page4')"></q-btn>
             <q-separator dark vertical></q-separator>
@@ -40,6 +42,14 @@
         </q-page-container>
     </q-layout>
 
+    <script>
+        window.quasarConfig = {
+            brand: {
+                primary: 'indigo',
+            }
+        }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@^1.5.4/dist/quasar.ie.polyfills.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@^1.5.4/dist/quasar.umd.min.js"></script>
@@ -47,10 +57,21 @@
 
 </body>
 
+
+
 <script>
     var mainAPP = new Vue({
         el: '#mainApp',
-        data: {},
+        data: {
+            defaultTheme: "light",
+            toggleButtonOptions: [{
+                label: 'Light',
+                value: 'light'
+            }, {
+                label: 'Dark',
+                value: 'dark'
+            }]
+        },
         methods: {
             loadPage: async function(view) {
                 let url = `views/${view}.html`;
@@ -70,8 +91,15 @@
             },
             getHTMLContent: async function(url) {
                 return await (await fetch(url)).text();
+            },
+            toggleTheme() {
+                this.$q.dark.toggle();
             }
         },
+        mounted() {
+            // this.$q.dark.set(true);
+            // this.$q.dark.toggle();
+        }
     })
 </script>
 

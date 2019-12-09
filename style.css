@@ -11,9 +11,6 @@
     color: black;
 }
 
-
-/* .main-content {
-    position: absolute;
-    top: 50%;
-    left: 45%;
-} */
+body.body--dark {
+    background: #000
+}

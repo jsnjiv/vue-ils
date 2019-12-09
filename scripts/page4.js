@@ -7,7 +7,8 @@ var page3App = new Vue({
         accept: '',
         time: '10:17',
         timeWithSeconds: '10:17:03',
-        date: '2019/12/10'
+        date: '2019/12/10',
+        dynamicColor: "blue"
     },
     methods: {
         trigger() {
